@@ -1,58 +1,96 @@
 let playerWins = 0;
 let computerWins = 0;
+
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+const outCome = document.querySelector(".result");
+
 function getComputerChoice() {
   let choices = ["rock", "paper", "scissors"];
   let index = Math.floor(Math.random() * choices.length);
   return choices[index];
 }
+
 function playRound(playerSelection, computerSelection) {
   computerSelection = getComputerChoice();
-  playerSelection = prompt("rock or paper or scissors:").toLowerCase();
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    console.log("you win! rock beats scissors");
+    const p = document.createElement("p");
+    p.innerText = "you win! rock beats scissors";
+    outCome.appendChild(p);
     playerWins++;
   } else if (computerSelection === "rock" && playerSelection === "scissors") {
-    console.log("you lose! rock beats scissors");
+    const p = document.createElement("p");
+    p.innerText = "you lose! rock beats scissors";
+    outCome.appendChild(p);
     computerWins++;
   } else if (computerSelection === "rock" && playerSelection === "rock") {
-    console.log("it's a draw");
+    const p = document.createElement("p");
+    p.innerText = "it's a draw";
+    outCome.appendChild(p);
   }
   // paper choice
   if (playerSelection === "paper" && computerSelection === "rock") {
-    console.log("you win! paper beats rock");
+    const p = document.createElement("p");
+    p.innerText = "you win! paper beats rock";
+    outCome.appendChild(p);
     playerWins++;
   } else if (computerSelection === "paper" && playerSelection === "rock") {
-    console.log("you lose! paper beats rock");
+    const p = document.createElement("p");
+    p.innerText = "you lose! paper beats rock";
+    outCome.appendChild(p);
     computerWins++;
   } else if (computerSelection === "paper" && playerSelection === "paper") {
-    console.log("it's a draw");
+    const p = document.createElement("p");
+    p.innerText = "it's a draw";
+    outCome.appendChild(p);
   }
   // scissors choice
   if (playerSelection === "scissors" && computerSelection === "paper") {
-    console.log("you win! scissors beats paper");
+    const p = document.createElement("p");
+    p.innerText = "you win! scissors beats paper";
+    outCome.appendChild(p);
     playerWins++;
   } else if (computerSelection === "scissors" && playerSelection === "paper") {
-    console.log("you lose! scissors beats paper");
+    const p = document.createElement("p");
+    p.innerText = "you lose! scissors beats paper";
+    outCome.appendChild(p);
     computerWins++;
   } else if (
     computerSelection === "scissors" &&
     playerSelection === "scissors"
   ) {
-    console.log("it's a draw");
+    const p = document.createElement("p");
+    p.innerText = "it's a draw";
+    outCome.appendChild(p);
   }
 }
 
-function game() {
-  for (let i = 1; i <= 5; i++) {
-    while(true){
-        playRound()
-        break;
-    }
+function CheckForWinner(playerScore, computerScore) {
+  if (playerScore === 5) {
+    const h2 = document.createElement("h2");
+    h2.innerText = "you win! great jop beating the computer";
+    outCome.appendChild(h2);
   }
-  if (playerWins > computerWins) {
-    console.log("you won the game")
-  } else {
-    console.log("you lost the game")
+  if (computerScore === 5) {
+    const h2 = document.createElement("h2");
+    h2.innerText = "you lose! try again 'till you win";
+    outCome.appendChild(h2);
   }
 }
-game()
+
+rock.addEventListener("click", function () {
+  playerSelection = "rock";
+  playRound(playerSelection, getComputerChoice());
+  CheckForWinner(playerWins, computerWins);
+});
+paper.addEventListener("click", function () {
+  playerSelection = "paper";
+  playRound(playerSelection, getComputerChoice());
+  CheckForWinner(playerWins, computerWins);
+});
+scissors.addEventListener("click", function () {
+  playerSelection = "scissors";
+  playRound(playerSelection, getComputerChoice());
+  CheckForWinner(playerWins, computerWins);
+});

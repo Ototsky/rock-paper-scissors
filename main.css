@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+div{
+    display: flex;
+    flex-direction: column;
+}
+p{
+    padding: 10px;
+}
